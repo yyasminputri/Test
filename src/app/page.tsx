@@ -2,9 +2,33 @@
 import React, { useState, useEffect } from 'react';
 import { Heart, Star, Sparkles, Gift, Cake, Zap } from 'lucide-react';
 
+// Type definitions
+interface CheckedItems {
+  [key: number]: boolean;
+}
+
+interface ChecklistItem {
+  id: number;
+  text: string;
+  emoji: string;
+}
+
+interface MediaItem {
+  type: 'video' | 'image';
+  src: string;
+  title: string;
+}
+
+interface DecorativeElement {
+  icon: React.ComponentType;
+  color: string;
+  size: string;
+  id: string;
+}
+
 // Letter Section Component - Simple Elegant Version
 const LetterSection = () => {
-  const [letterState, setLetterState] = useState('closed'); // 'closed', 'peek', 'open'
+  const [letterState, setLetterState] = useState<'closed' | 'peek' | 'open'>('closed');
   
   const handleEnvelopeClick = () => {
     if (letterState === 'closed') {
@@ -84,7 +108,7 @@ const LetterSection = () => {
           <p className="text-gray-800 text-lg font-montserrat">Click the envelope to reveal a special message</p>
         </div>
             
-            {/* Enhanced Envelope dengan gambar 1.png dan 2.png */}
+            {/* Enhanced Envelope với gambar 1.png dan 2.png */}
             <div 
               className={`relative cursor-pointer transition-all duration-700 transform hover:scale-110 ${
                 letterState === 'open' ? 'scale-95 opacity-30' : ''
@@ -143,13 +167,6 @@ const LetterSection = () => {
                 <div className="absolute top-2 right-2 w-4 h-4 bg-gray-200 transform rotate-45 rounded-tl-lg shadow-md"></div>
                 <div className="absolute bottom-2 left-2 w-4 h-4 bg-gray-200 transform rotate-45 rounded-br-lg shadow-md"></div>
                 
-                {/* Letter Header 
-                <div className="text-center mb-10">
-                  <h3 className="text-4xl font-bold text-black mb-4 font-montserrat"> For Stevanza Gian Maheswara </h3>
-                  <div className="w-24 h-1 bg-sky-300 mx-auto rounded-full"></div>
-                </div>
-                */}
-
                 {/* Letter Content */}
                 <div className="space-y-6 text-black leading-relaxed">
                   <p className="text-5xl font-semibold text-center text-black font-montserrat">
@@ -194,9 +211,9 @@ const LetterSection = () => {
 };
 
 const BirthdayBookWebsite = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [checkedItems, setCheckedItems] = useState({});
+  const [scrollY, setScrollY] = useState<number>(0);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [checkedItems, setCheckedItems] = useState<CheckedItems>({});
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -205,20 +222,37 @@ const BirthdayBookWebsite = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleChecklistItem = (itemId) => {
+  const toggleChecklistItem = (itemId: number) => {
     setCheckedItems(prev => ({
       ...prev,
       [itemId]: !prev[itemId]
     }));
   };
 
-  const decorativeElements = [
+  const decorativeElements: DecorativeElement[] = [
     { icon: Star, color: 'text-yellow-400', size: 'text-2xl', id: 'star1' },
     { icon: Heart, color: 'text-pink-500', size: 'text-xl', id: 'heart1' },
     { icon: Sparkles, color: 'text-purple-400', size: 'text-lg', id: 'sparkle1' },
     { icon: Gift, color: 'text-blue-400', size: 'text-2xl', id: 'gift1' },
     { icon: Cake, color: 'text-orange-400', size: 'text-xl', id: 'cake1' },
     { icon: Zap, color: 'text-green-400', size: 'text-lg', id: 'zap1' },
+  ];
+
+  const checklistItems: ChecklistItem[] = [
+    { id: 1, text: 'Blow the candle with a sweet cake', emoji: '🎂' },
+    { id: 2, text: 'Make 10 birthday wishes', emoji: '⭐' },
+    { id: 3, text: 'A warm birthday kiss', emoji: '💋' },
+    { id: 4, text: 'Get a free birthday hug', emoji: '🤗' },
+    { id: 5, text: 'Unwrap the surprise gift', emoji: '🎁' }
+  ];
+
+  const mediaItems: MediaItem[] = [
+    { type: 'video', src: '1.mp4', title: 'Sweet Memory 1' },
+    { type: 'video', src: '4.mp4', title: 'Beautiful Moment 1' },
+    { type: 'video', src: '2.mp4', title: 'Sweet Memory 2' },
+    { type: 'video', src: '5.mp4', title: 'Beautiful Moment 2' },
+    { type: 'video', src: '3.mp4', title: 'Sweet Memory 3' },
+    { type: 'video', src: '6.mp4', title: 'Beautiful Moment 3' },
   ];
 
   return (
@@ -407,13 +441,7 @@ const BirthdayBookWebsite = () => {
 
               {/* Checklist Items */}
               <div className="space-y-4">
-                {[
-                  { id: 1, text: 'Blow the candle with a sweet cake', emoji: '🎂' },
-                  { id: 2, text: 'Make 10 birthday wishes', emoji: '⭐' },
-                  { id: 3, text: 'A warm birthday kiss', emoji: '💋' },
-                  { id: 4, text: 'Get a free birthday hug', emoji: '🤗' },
-                  { id: 5, text: 'Unwrap the surprise gift', emoji: '🎁' }
-                ].map((item, index) => (
+                {checklistItems.map((item, index) => (
                   <div key={item.id} 
                       className="flex items-center space-x-5 py-4 px-4 rounded-xl hover:bg-white hover:shadow-md transition-all duration-300 group cursor-pointer"
                       style={{
@@ -490,14 +518,7 @@ const BirthdayBookWebsite = () => {
           <div className="relative">
             <div className="flex animate-scroll space-x-6">
               {/* First set of items */}
-              {[
-                { type: 'video', src: '1.mp4', title: 'Sweet Memory 1' },
-                { type: 'video', src: '4.mp4', title: 'Beautiful Moment 1' },
-                { type: 'video', src: '2.mp4', title: 'Sweet Memory 2' },
-                { type: 'video', src: '5.mp4', title: 'Beautiful Moment 2' },
-                { type: 'video', src: '3.mp4', title: 'Sweet Memory 3' },
-                { type: 'video', src: '6.mp4', title: 'Beautiful Moment 3' },
-              ].map((item, index) => (
+              {mediaItems.map((item, index) => (
                 <div key={`first-${index}`} className="flex-none">
                   <div className="relative w-64 h-80 bg-white rounded-2xl shadow-xl p-4 transform hover:scale-105 transition-all duration-300">
                     <div className="w-full h-64 rounded-xl overflow-hidden">
@@ -520,8 +541,12 @@ const BirthdayBookWebsite = () => {
                           alt={item.title}
                           className="w-full h-full object-cover rounded-xl"
                           onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.nextSibling.style.display = 'flex';
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const nextSibling = target.nextSibling as HTMLElement;
+                            if (nextSibling) {
+                              nextSibling.style.display = 'flex';
+                            }
                           }}
                         />
                       )}
@@ -549,14 +574,7 @@ const BirthdayBookWebsite = () => {
               ))}
               
               {/* Duplicate set for seamless loop */}
-              {[
-                { type: 'video', src: '1.mp4', title: 'Sweet Memory 1' },
-                { type: 'video', src: '4.mp4', title: 'Beautiful Moment 1' },
-                { type: 'video', src: '2.mp4', title: 'Sweet Memory 2' },
-                { type: 'video', src: '5.mp4', title: 'Beautiful Moment 2' },
-                { type: 'video', src: '3.mp4', title: 'Sweet Memory 3' },
-                { type: 'video', src: '6.mp4', title: 'Beautiful Moment 3' },
-              ].map((item, index) => (
+              {mediaItems.map((item, index) => (
                 <div key={`second-${index}`} className="flex-none">
                   <div className="relative w-64 h-80 bg-white rounded-2xl shadow-xl p-4 transform hover:scale-105 transition-all duration-300">
                     <div className="w-full h-64 rounded-xl overflow-hidden">
@@ -579,8 +597,12 @@ const BirthdayBookWebsite = () => {
                           alt={item.title}
                           className="w-full h-full object-cover rounded-xl"
                           onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.nextSibling.style.display = 'flex';
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const nextSibling = target.nextSibling as HTMLElement;
+                            if (nextSibling) {
+                              nextSibling.style.display = 'flex';
+                            }
                           }}
                         />
                       )}
