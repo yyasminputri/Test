@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Heart, Star, Sparkles, Gift, Cake, Zap } from 'lucide-react';
 
 // Type definitions
@@ -119,10 +120,12 @@ const LetterSection = () => {
               {/* Closed Envelope State - 1.png */}
               <div className={`transition-all duration-700 ${letterState === 'closed' ? 'opacity-100' : 'opacity-0'}`}>
                 <div className="flex justify-center items-center">
-                  <img 
-                    src="1.png" 
+                  <Image 
+                    src="/1.png" 
                     alt="Closed Envelope"
-                    className="w-800 h-[940px] object-contain rounded-lg"
+                    width={800}
+                    height={940}
+                    className="object-contain rounded-lg"
                     style={{ aspectRatio: '4/5.2' }}
                   />
                 </div>
@@ -131,10 +134,12 @@ const LetterSection = () => {
               {/* Opening/Opened Envelope State - 2.png */}
               <div className={`absolute inset-0 transition-all duration-700 ${letterState !== 'closed' ? 'opacity-100' : 'opacity-0'}`}>
                 <div className="flex justify-center items-center">
-                  <img 
-                    src="2.png" 
+                  <Image 
+                    src="/2.png" 
                     alt="Opened Envelope"
-                    className="w-800 h-[940px] object-contain rounded-lg"
+                    width={800}
+                    height={940}
+                    className="object-contain rounded-lg"
                     style={{ aspectRatio: '4/5.2' }}
                   />
                 </div>
@@ -175,7 +180,7 @@ const LetterSection = () => {
 
                   <p className="text-sm font-montserrat leading-7">
                     Tepat beberapa hari yang lalu, adalah hari spesialmu. Selamat berulang tahun sayang dengan bertambah usia ke yang 21 tahun. Aku selalu berharap hal baik menyertaimu. Semoga panjang umur, sehat selalu, dilimpahkan banyak rezeki, semakin sayang sama mama dan papa, semakin sayang aku, semakin **dewasa** yang terpenting!  
-                    May this year bring you endless opportunities and adventures. I'm hoping your day will be much much better each day and I hope you chase your dreams with passion and determination. Remember, you are capable of achieving anything you set your mind to!
+                    May this year bring you endless opportunities and adventures. I&apos;m hoping your day will be much much better each day and I hope you chase your dreams with passion and determination. Remember, you are capable of achieving anything you set your mind to!
                     Wishing you a year filled with love, laughter, and unforgettable memories. May you always find joy in the little things and strength in the challenges you face.
                     You deserve all the happiness in the world, and I will always be here to support you. Keep shining bright and never forget how special you are!
                   </p>
@@ -405,9 +410,11 @@ const BirthdayBookWebsite = () => {
             
             {/* Enhanced Notebook with HBD.png Background */}
             <div className="relative group-hover:shadow-3xl transition-shadow duration-500">
-              <img 
-                src="hbd.png" 
+              <Image 
+                src="/hbd.png" 
                 alt="Birthday Notebook"
+                width={800}
+                height={600}
                 className="w-3/4 h-auto shadow-2xl rounded-xl mx-auto"
               />
               <div className="absolute inset-0 p-8 md:p-12">
@@ -479,7 +486,7 @@ const BirthdayBookWebsite = () => {
               {/* Bottom Note */}
               <div className="mt-10 pt-6 border-t border-pink-200">
                 <p className="text-base italic text-gray-600 font-montserrat text-center">
-                  "Make every moment count on your special day! 💕"
+                  &ldquo;Make every moment count on your special day! 💕&rdquo;
                 </p>
               </div>
               
