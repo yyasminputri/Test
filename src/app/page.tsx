@@ -506,7 +506,7 @@ const BirthdayBookWebsite = () => {
       <section className="relative z-30 px-4 bg-transparent">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-6xl md:text-8xl font-black text-red-600 leading-tight mb-6 font-montserrat tracking-wide">
-            HAVING YOU IS ONE OF THE BEST THING I'VE EVER HAD
+            HAVING YOU IS ONE OF THE BEST THING I&apos;VE EVER HAD
           </h1>
           <p className="text-3xl md:text-4xl font-medium text-black italic font-montserrat">
             love you, xoxo
@@ -543,9 +543,11 @@ const BirthdayBookWebsite = () => {
                           </div>
                         </video>
                       ) : (
-                        <img 
+                        <Image 
                           src={item.src} 
                           alt={item.title}
+                          width={256}
+                          height={256}
                           className="w-full h-full object-cover rounded-xl"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
@@ -599,9 +601,11 @@ const BirthdayBookWebsite = () => {
                           </div>
                         </video>
                       ) : (
-                        <img 
+                        <Image 
                           src={item.src} 
                           alt={item.title}
+                          width={256}
+                          height={256}
                           className="w-full h-full object-cover rounded-xl"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
